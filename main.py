@@ -27,13 +27,13 @@ def send_notification(title, body):
 
     json = {
         "to": device_fcm,
-        "notification": {
-        "title": title,
-        "body": body,
-        "mutable_content": "true",
-        "sound": "Tri-tone"
+            "notification": {
+            "title": title,
+            "body": body,
+            "mutable_content": "true",
+            "sound": "Tri-tone"
         },
-    "data": {
+        "data": {
         }
     }
 
