@@ -16,7 +16,7 @@ def get_driver():
     else:
         return webdriver.Safari()
 
-def send_notification(date):
+def send_notification(title, body):
     url = 'https://fcm.googleapis.com/fcm/send'
 
     server_key = "AAAAI-h238w:APA91bFEbTW5GG-s-7elcTGdN5cdqmgbIgJnvP-VRXzzFTViVdXH6SCuSGWTvJ6a41iu9SiQKcbDiWARm2lz9k95mjYCz53Etv8xW__Xcvjh4daP1HqsveDfRO8wnvnfTBqVNncRBdH4"
@@ -27,8 +27,8 @@ def send_notification(date):
     json = {
         "to": device_fcm,
         "notification": {
-        "title": "Nova data disponível",
-        "body": f"{date.strftime('%d/%m/%Y')}",
+        "title": title,
+        "body": body,
         "mutable_content": "true",
         "sound": "Tri-tone"
         },
@@ -37,7 +37,10 @@ def send_notification(date):
     }
 
     response = requests.post(url, headers=headers, json=json)
-    print(response.text)
+    print("Message sent: ", response.text)
+
+def send_notification(date):
+    send_notification("⚠️ Nova data disponível", date.strftime('%d/%m/%Y'))
 
 def fetch_date():
     driver = get_driver()
@@ -97,14 +100,23 @@ def fetch_date():
 
         parsed_dates.append(datetime.date(int(year), int(month) + 1, int(day)))
     
-    driver.quit()
+    driver.cancel()
     return min(parsed_dates)
 
 while True:
-    try:
-        date = fetch_date()
-        send_notification(date)
-    except Exception as e:
-        print("Error: ", e)
+    for x in range(60):
+        try:
+            date = fetch_date()
+            if date < datetime.datetime(2022, 6, 1):
+                send_notification(date)
+                break
+            print("Got date: ", date)
+            send_notification(date)
+        except Exception as e:
+            print("Error: ", e)
+            time.sleep(60*10)
 
-    time.sleep(60)
+        random = random.uniform(3, 12)
+        time.sleep(60*random)
+    
+    send_notification("⚙️ Sistema rodando", "Não se preocupe")
