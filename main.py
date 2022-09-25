@@ -97,7 +97,7 @@ def fetch_date():
 
         parsed_dates.append(datetime.date(int(year), int(month) + 1, int(day)))
     
-    driver.close()
+    driver.quit()
     return min(parsed_dates)
 
 while True:
