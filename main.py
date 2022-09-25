@@ -39,7 +39,7 @@ def send_notification(title, body):
     response = requests.post(url, headers=headers, json=json)
     print("Message sent: ", response.text)
 
-def send_notification(date):
+def send_date_notification(date):
     send_notification("⚠️ Nova data disponível", date.strftime('%d/%m/%Y'))
 
 def fetch_date():
@@ -103,20 +103,19 @@ def fetch_date():
     driver.cancel()
     return min(parsed_dates)
 
-while True:
-    send_notification("🎉 Sistema inicializado", "Tudo em cima.")
+send_notification("🎉 Sistema inicializado", "Tudo em cima.")
 
+while True:
     successes = 0
     errors = 0
 
     for x in range(60):
         try:
             date = fetch_date()
-            if date < datetime.datetime(2022, 6, 1):
-                send_notification(date)
-                break
             print("Got date: ", date)
-            send_notification(date)
+            if date < datetime.datetime(2022, 6, 1):
+                send_date_notification(date)
+                break
             successes+= 1
         except Exception as e:
             print("Error: ", e)
