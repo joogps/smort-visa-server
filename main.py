@@ -123,7 +123,7 @@ while True:
             errors+= 1
             time.sleep(60*10)
 
-        random = random.uniform(3, 12)
-        time.sleep(60*random)
+        number = random.uniform(3, 12)
+        time.sleep(60*number)
     
     send_notification("⚙️ Sistema rodando", f"Nas últimas verificações, houveram {successes} sucessos e {errors} erros.")
