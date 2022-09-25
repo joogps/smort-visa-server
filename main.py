@@ -20,7 +20,7 @@ def send_notification(title, body):
     url = 'https://fcm.googleapis.com/fcm/send'
 
     server_key = "AAAAI-h238w:APA91bFEbTW5GG-s-7elcTGdN5cdqmgbIgJnvP-VRXzzFTViVdXH6SCuSGWTvJ6a41iu9SiQKcbDiWARm2lz9k95mjYCz53Etv8xW__Xcvjh4daP1HqsveDfRO8wnvnfTBqVNncRBdH4"
-    device_fcm = "fdeekePJ8Ue9mzMa8ZpeAP:APA91bFtX4kr0z6W05By4WTlVoUFxH16VMRcDs0mwOmLcm8pUvKNi1JC1z-u_yX1l-ElDF9I7DLP8RIAveD2KvqTO8raruhHMuIO7C0bndIsC7NA2MbjxbBxzMDS4VGRizOkJ_0MyZFT"
+    device_fcm = "cR1gkwwosEmTvRx6lTWQPU:APA91bFSAYWgXf5zi5AwvT3Lxv5Dn-RyO2TLyjkfInIqYkmUesL2fmSuw1BSboSCYDqzeIbhnCZ1DbcP_F6pRltGScJ-RcYl8p39sOByPiI7zRiMachXC0QqxBvEEuAOcVN99ezaXjTG"
 
     headers = {"Content-Type": "application/json", "Authorization": f"key={server_key}"}
 
@@ -113,7 +113,7 @@ while True:
         try:
             date = fetch_date()
             print("Got date: ", date)
-            if date < datetime.datetime(2022, 6, 1):
+            if date < datetime.date(2022, 6, 1):
                 send_date_notification(date)
                 break
             successes+= 1
