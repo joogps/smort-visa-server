@@ -104,6 +104,8 @@ def fetch_date():
     return min(parsed_dates)
 
 while True:
+    send_notification("🎉 Sistema inicializado", "Tudo em cima.")
+
     successes = 0
     errors = 0
 
