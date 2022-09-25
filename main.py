@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 import datetime
 import os
 import requests
+import random
 
 def get_driver(): 
     if "GOOGLE_CHROME_BIN" in os.environ:
