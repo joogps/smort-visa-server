@@ -100,7 +100,7 @@ def fetch_date():
 
         parsed_dates.append(datetime.date(int(year), int(month) + 1, int(day)))
     
-    driver.cancel()
+    driver.close()
     return min(parsed_dates)
 
 send_notification("🎉 Sistema inicializado", "Tudo em cima.")
