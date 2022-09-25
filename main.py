@@ -104,6 +104,9 @@ def fetch_date():
     return min(parsed_dates)
 
 while True:
+    successes = 0
+    errors = 0
+
     for x in range(60):
         try:
             date = fetch_date()
@@ -112,11 +115,13 @@ while True:
                 break
             print("Got date: ", date)
             send_notification(date)
+            successes+= 1
         except Exception as e:
             print("Error: ", e)
+            errors+= 1
             time.sleep(60*10)
 
         random = random.uniform(3, 12)
         time.sleep(60*random)
     
-    send_notification("⚙️ Sistema rodando", "Não se preocupe")
+    send_notification("⚙️ Sistema rodando", f"Nas últimas verificações, houveram {successes} sucessos e {errors} erros.")
