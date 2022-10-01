@@ -113,16 +113,16 @@ while True:
     for x in range(60):
         try:
             date = fetch_date()
-            print("Got date: ", date)
-            if date < datetime.date(2022, 6, 1):
+            current_date = datetime.date(2022, 6, 1)
+            print("Got date: ", date, "• Current date: ", current_date)
+            if date < current_date:
                 send_date_notification(date)
-                break
             successes+= 1
         except Exception as e:
             print("Error: ", e)
             errors+= 1
             time.sleep(60*10)
-
+        
         number = random.uniform(3, 12)
         time.sleep(60*number)
     
